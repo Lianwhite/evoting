@@ -1,0 +1,82 @@
+/* body{
+    color: white
+} */
+
+.navbar {
+    color: rgb(78, 75, 75) !important;
+}
+
+
+body {
+    background: #eee !important;
+}
+
+.input-group-text {
+    inline-size: 40px !important;
+}
+
+.login-box {
+    font-family: 'Segoe UI', 'Roboto', 'Ubuntu';
+    max-width: 580px;
+    background: white;
+    border-radius: 12px;
+    margin: 30px auto 15px;
+    padding: 30px 15px 15px;
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.3);
+    
+}
+
+.login-box hgroup {
+    margin-bottom: 30px;
+    margin-top: 0;
+    font-weight: lighter;
+}
+
+.login-box .heading {
+    font-weight: lighter;
+}
+
+.login-box label {
+    font-size: 0.9em;
+    opacity: .6;
+}
+
+.login-box .login-btn {
+    background: linear-gradient(90deg, dodgerblue, #38d0d5);
+    border: none;
+    border-radius: 12px;
+    display: block;
+    font-size: .9em;
+    font-weight: lighter;
+    height: 35px;
+    color: white;
+    padding: 5px 15px;
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all .3s ease-out;
+}
+
+.login-btn.expand {
+    width: 100%;
+    text-align: center;
+}
+
+.login-btn:hover {
+    box-shadow: 0 0 1px 4px lightblue;
+}
+
+.form-control-file {
+    border: none;
+    border-radius: 50px !important;
+}
+.check{
+    margin: 0px 0px 10px 20px !important;
+    /* margin-left: 10px;
+    margin-bottom: 10px; */
+    border-radius: 20px;
+}
+.error{
+    color: rgb(180, 6, 6) !important;
+    font-size: 0.8em !important;
+}
