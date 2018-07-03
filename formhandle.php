@@ -3,10 +3,28 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $empty_first = $empty_last = $empty_email = $empty_pass = $passmismatch = $empty_origin = $empty_lga = $loginError = $empty_cred = "";
-$empty_first = $empty_dob = $empty_phone = $empty_voters_id = $empty_address = $empty_gender = $userExists = $empty_passport = "";
+$empty_first = $noNetwork = $empty_dob = $empty_phone = $empty_voters_id = $empty_address = $empty_gender = $userExists = $empty_passport = "";
 
 //Voters registration
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["votersreg"])){
+    function is_connected()
+{
+    $connected = @fsockopen("www.example.com", 80); 
+                                        //website, port  (try 80 or 443)
+    if ($connected){
+        $is_conn = true; //action when connected
+        fclose($connected);
+    }else{
+        $is_conn = false; //action in connection failure
+    }
+    return $is_conn;
+
+}
+if(!is_connected()){
+    $noNetwork = "Registration not Successful! Please Check your internet connection";
+    return;
+}
+
 $error = 0;
  if (!empty($_POST['first'])) {
     $first=trim($_POST["first"]);
@@ -452,3 +470,4 @@ $conn = null;
 //         }
 // }
 // a:
+// return false;

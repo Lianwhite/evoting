@@ -1,10 +1,44 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>eVoTiNg Confirmation email</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- icons -->
+    <link rel="stylesheet" href="./resources/icon_font-file/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- css/basscss/bootstrap -->
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./resources/basscss.min.css">
+    <link rel="stylesheet" href="./resources/bootstrap-4.1.0-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./resources/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="./resources/jquery-ui-1.12.1/jquery-ui.structure.css">
+    <link rel="stylesheet" href="./resources/jquery-ui-1.12.1/jquery-ui.theme.css">
+    <!-- js/jquery/ajax -->
+    <script type="text/javascript" src="./resources/popper.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./resources/tooltip.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./resources/jquery-3.3.1.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./resources/jquery-ui-1.12.1/jquery-ui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./resources/bootstrap-4.1.0-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./resources/bootstrap-4.1.0-dist/js/bootstrap.bundle.js"></script>
 </head>
-<body style="text-align: center;">
-  <p style="font-size: 20px; font-weight: bold; color: rgb(79, 41, 114);">Thank you for registering with us.!</p>
-  <p>Please <b><a href="#">CLICK HERE</a></b> to confirm your email.</p>
-  <p><i>You recieved this email because you recently signed up at <a href="www.evoting.ng">www.evoting.ng</a>. If you do not know about this action, kindly ignore this email.</i></p>
+<body>
+  <div class="current">
+    <form method="POST">
+      <input type="text">
+    <button type="submit">Submit</button>
+  </form>
+  </div>
+  <script>
+  $(document).ready(function(){
+    $('button[type=submit]').on('click', function(e){
+      // $(e.target).parent().css("display", "none");
+      $(e.target).parent().closest(".current").css("display", "none");
+      e.preventDefault();
+    });
+    
+  });
+  </script>
 </body>
 </html>

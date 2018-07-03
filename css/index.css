@@ -151,3 +151,20 @@ legend {
 .navbar-nav li a:nth-child(2){
     padding: 10px;
 }
+.modalTitle{
+    background-color: #055277;
+    color: #d1e4ec;
+}
+.inline-flex legend.header{
+    color: #d5d7d8 !important; 
+    background-color: #055277 !important;
+    font-family: 'Wendy One', sans-serif;
+}
+.layer {
+    background-color: black;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+}

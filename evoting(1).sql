@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2018 at 10:52 AM
+-- Generation Time: Jul 03, 2018 at 11:30 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.1.17-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -36,26 +36,24 @@ CREATE TABLE `candidates` (
   `approval` tinyint(1) NOT NULL DEFAULT '0',
   `date` varchar(50) NOT NULL,
   `election_id` int(11) DEFAULT NULL,
-  `no_votes` int(50) DEFAULT '0'
+  `no_votes` int(50) DEFAULT '0',
+  `disabled` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `candidates`
 --
 
-INSERT INTO `candidates` (`id`, `user_id`, `passport`, `credential`, `position`, `party`, `approval`, `date`, `election_id`, `no_votes`) VALUES
-(2, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-14_16-28-30.png', 'Chairman', 'APC', 0, '18/06/23', NULL, 0),
-(3, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-14_16-28-30.png', 'Chairman', 'APC', 0, '18/06/23', NULL, 0),
-(4, 19, 'uploads/1.jpg', 'uploads/UK-scholarship.png', 'Presidential', 'PDP', 1, '18/06/23', 4, 0),
-(6, 23, 'uploads/2.jpg', 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'Governorship', 'ANPP', 1, '18/06/23', 5, 0),
-(7, 24, 'uploads/3.jpg', 'uploads/St-Andrews-Photo-Sammi-McKee.jpg', 'Senatorial', 'APC', 1, '18/06/23', 6, 1),
-(8, 20, 'uploads/Tony-Okpanachi.jpg', 'uploads/Screenshot_from_2018-04-04_10-44-10.png', 'Presidential', 'CPC', 1, '18/06/23', 4, 1),
-(9, 21, 'uploads/5.jpg', 'uploads/visa_logo.jpg', 'Governorship', 'OPC', 1, '18/06/23', 5, 0),
-(10, 22, 'uploads/6.jpg', 'uploads/Screenshot_from_2018-06-17_12-49-40.png', 'Senatorial', 'APGA', 0, '18/06/23', NULL, 0),
-(11, 25, 'uploads/0.jpg', 'uploads/Screenshot_from_2018-04-04_10-44-10.png', 'Presidential', 'APC', 1, '18/06/23', 4, 1),
-(12, 26, 'uploads/11.jpg', 'uploads/scholarship_logo.jpg', 'Presidential', 'ANPP', 1, '18/06/23', 4, 0),
-(13, 27, 'uploads/12.jpg', 'uploads/study-in-london.jpg', 'Presidential', 'ADP', 1, '18/06/23', 4, 1),
-(14, 28, 'uploads/15.jpg', 'uploads/usa_scholarship.jpg', 'Senatorial', 'APC', 1, '18/06/23', 6, 1);
+INSERT INTO `candidates` (`id`, `user_id`, `passport`, `credential`, `position`, `party`, `approval`, `date`, `election_id`, `no_votes`, `disabled`) VALUES
+(2, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-14_16-28-30.png', 'Chairmanship', 'APC', 1, '18/06/23', NULL, 0, 0),
+(4, 19, 'uploads/1.jpg', 'uploads/UK-scholarship.png', 'Presidential', 'PDP', 1, '18/06/23', 12, 1, 0),
+(6, 23, 'uploads/2.jpg', 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'Governorship', 'ANPP', 1, '18/06/23', 5, 0, 0),
+(7, 24, 'uploads/3.jpg', 'uploads/St-Andrews-Photo-Sammi-McKee.jpg', 'Senatorial', 'APC', 1, '18/06/23', 6, 1, 0),
+(8, 20, 'uploads/Tony-Okpanachi.jpg', 'uploads/Screenshot_from_2018-04-04_10-44-10.png', 'Presidential', 'CPC', 1, '18/06/23', 12, 1, 0),
+(9, 21, 'uploads/5.jpg', 'uploads/visa_logo.jpg', 'Governorship', 'OPC', 1, '18/06/23', 5, 0, 0),
+(10, 22, 'uploads/6.jpg', 'uploads/Screenshot_from_2018-06-17_12-49-40.png', 'Senatorial', 'APGA', 1, '18/06/23', 7, 0, 0),
+(11, 25, 'uploads/0.jpg', 'uploads/Screenshot_from_2018-04-04_10-44-10.png', 'Presidential', 'APC', 1, '18/06/23', 12, 1, 0),
+(14, 28, 'uploads/15.jpg', 'uploads/usa_scholarship.jpg', 'Senatorial', 'APC', 0, '18/06/23', 6, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -77,9 +75,17 @@ INSERT INTO `elections` (`election_id`, `start_date`, `end_date`) VALUES
 (1, '2018-06-19', '2018-06-29'),
 (2, '2018-06-19', '2018-06-29'),
 (3, '2018-06-19', '2018-06-29'),
-(4, '2018-06-19', '2018-06-29'),
-(5, '2018-06-10', '2018-06-20'),
-(6, '2018-06-21', '2018-06-27');
+(4, '2018-06-19', '2018-07-10'),
+(5, '2018-06-10', '2018-07-20'),
+(6, '2018-06-21', '2018-07-27'),
+(7, '2018-06-20', '2018-06-27'),
+(8, '2016-05-05', '2016-05-04'),
+(9, '2016-05-05', '2016-05-09'),
+(10, '2016-05-05', '2016-05-09'),
+(11, '2018-05-05', '2018-07-09'),
+(12, '2018-06-19', '2018-07-29'),
+(13, '2018-06-19', '2018-07-29'),
+(14, '2018-06-19', '2018-07-27');
 
 -- --------------------------------------------------------
 
@@ -94,7 +100,7 @@ CREATE TABLE `partyLeaders` (
   `credential` varchar(199) DEFAULT NULL,
   `party` varchar(10) DEFAULT NULL,
   `approval` tinyint(1) DEFAULT '0',
-  `active` tinyint(1) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   `date` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -103,18 +109,19 @@ CREATE TABLE `partyLeaders` (
 --
 
 INSERT INTO `partyLeaders` (`no`, `user_id`, `passport`, `credential`, `party`, `approval`, `active`, `date`) VALUES
-(1, 16, 'uploads/Screenshot from 2018-05-05 07-38-13.png', 'uploads/star empty.png', 'APC', 0, 0, '18/06/22'),
-(2, 16, 'uploads/Screenshot from 2018-05-05 07-38-13.png', 'uploads/star empty.png', 'APC', 0, 0, '18/06/22'),
+(1, 16, 'uploads/Screenshot from 2018-05-05 07-38-13.png', 'uploads/star empty.png', 'APC', 1, 0, '18/06/22'),
+(2, 16, 'uploads/Screenshot from 2018-05-05 07-38-13.png', 'uploads/star empty.png', 'APC', 1, 0, '18/06/22'),
 (3, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star empty.png', 'APC', 0, 0, '18/06/22'),
-(4, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 0, 0, '18/06/22'),
+(4, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 1, 0, '18/06/22'),
 (5, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 0, 0, '18/06/22'),
-(6, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 0, 0, '18/06/22'),
-(7, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 0, 0, '18/06/22'),
-(8, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 0, 0, '18/06/22'),
+(6, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 1, 0, '18/06/22'),
+(7, 16, 'uploads/Screenshot_from_2018-05-05_07-38-13.png', 'uploads/star_empty.png', 'APC', 1, 0, '18/06/22'),
+(8, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 1, 0, '18/06/22'),
 (9, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 0, 0, '18/06/22'),
 (10, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 0, 0, '18/06/22'),
-(11, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 0, 0, '18/06/22'),
-(12, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 0, 0, '18/06/22');
+(11, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 1, 0, '18/06/22'),
+(12, 17, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'ANPP', 1, 0, '18/06/22'),
+(13, 31, 'uploads/study_in_lon.jpg', 'uploads/Screenshot_from_2018-04-15_00-29-14.png', 'UNPP', 1, 0, '18/06/29');
 
 -- --------------------------------------------------------
 
@@ -158,7 +165,10 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `origin`, `lga`, `dob`, `p
 (25, 'Fullstack', 'Olotu', 'Delta', 'Warri south', '07/07/2000', '070488774892', 'fullstack@olotu.co', '3298798479084', '$2y$10$ot0Z0JikWVRr8HLuNDInoOIlBi/E1UdBLTjVwNhGLtYMvxmITNj/u', 'Female', 'UST, PH', 1, 0, '99a4f4c6c58fa3beaa717f0d00e1bc12', '2018-06-23'),
 (26, 'Ubuntu', 'Devlead', 'Akwa Ibom', 'Warri south', '08/01/1992', '0705948392', 'ubuntu@olotu.co', '8749837902', '$2y$10$oGfrQkTorC/3X2naHAV6Ze.OwpoX1EK4S0lYMVrR4m/Lq2EwElZKK', 'Male', 'Garrison, PH', 1, 0, '2c20d6c70cc52c4e337bc95e7f0b2388', '2018-06-23'),
 (27, 'Chinedu', 'Olotu', 'Rivers', 'Yenagoa', '04/02/1880', '080276287984', 'chinedu@olotu.co', '47873290299303', '$2y$10$f5Zb4NsFlGF1TP6Sba4JZOOYgXmeo/laE/qpH1lK7pU20FJE/mOXO', 'Male', '#3 unknown street, PH', 1, 0, '46c5b6d1bf91d1802f920cc75f61e4cd', '2018-06-23'),
-(28, 'Melas', 'Boss', 'Bayelsa', 'Phalga', '20/05/1960', '0809382782', 'melas@olotu.co', '8427902983982', '$2y$10$/O591qhwFjKo5n.bijOxkum6pkei8gTTor.fI7XCAWbKtWV7FlavC', 'Male', 'No 5 unknown street, PH', 0, 0, '1f814d511918b449bcded1724e50b449', '2018-06-23');
+(28, 'Melas', 'Boss', 'Bayelsa', 'Phalga', '20/05/1960', '0809382782', 'melas@olotu.co', '8427902983982', '$2y$10$/O591qhwFjKo5n.bijOxkum6pkei8gTTor.fI7XCAWbKtWV7FlavC', 'Male', 'No 5 unknown street, PH', 0, 0, '1f814d511918b449bcded1724e50b449', '2018-06-23'),
+(29, 'manchi', 'jquery', 'Bayelsa', 'Phalga', '09/12/1999', '+234807777777', 'manchidede2@gmail.com', 'voter20099', '$2y$10$5mLkShkxJ59.4rPNrIQmSOOka0uhBvc9n.7qV/nC7bvMUqy7o8yVa', 'Male', '24 jumba close', 1, 0, '1b4b7310b312e73ffff07f02bf8fc74b', '2018-06-25'),
+(30, 'sexa', 'dashgsh', 'Delta', 'Warri south', '09/09/1971', '+2349023456789', 'example@example.com', '12345678', '$2y$10$s/TtUF6FZxYjtVNB5M/IK.X5rGuIVqT8nrlmRbnNSufSRE8K2mEfC', 'Male', 'hhh jhjjj jjjj jj', 1, 0, 'e7faf358b8fe834166a38d1468a80a0c', '2018-06-29'),
+(31, 'Okafor', 'chidi', 'Cross', 'Yenagoa', '20/01/2003', '+2349023456789', 'example@example.co', '98429092092923', '$2y$10$QQqH.DKo.Wh2acg2IJmQse99tsj97vwJgK/mO9d3yhUsmbIh.iWqS', 'Male', 'kjklkl kklklkl klk lkkl', 1, 0, '4da4531487d9fd92647e118bbf99ed97', '2018-06-29');
 
 -- --------------------------------------------------------
 
@@ -177,11 +187,10 @@ CREATE TABLE `votes` (
 --
 
 INSERT INTO `votes` (`user_id`, `candidate_id`, `election_id`) VALUES
-(16, 20, 4),
-(16, 24, 6),
-(18, 27, 4),
-(18, 28, 6),
-(19, 25, 4);
+(29, 25, 4),
+(29, 28, 6),
+(30, 19, 4),
+(16, 28, 6);
 
 --
 -- Indexes for dumped tables
@@ -240,17 +249,17 @@ ALTER TABLE `candidates`
 -- AUTO_INCREMENT for table `elections`
 --
 ALTER TABLE `elections`
-  MODIFY `election_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `election_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `partyLeaders`
 --
 ALTER TABLE `partyLeaders`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- Constraints for dumped tables
 --

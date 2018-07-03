@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 // goto a;
+include 'deleteDisable.php';
 try {
     include 'dbconnect.php';
     $startdate = strtotime("2018/06/22");
@@ -9,38 +10,36 @@ try {
     $today = date('y-m-d', strtotime("today midnight"));
     // AND end_date <= :today
     // $data = $conn->prepare("SELECT * FROM candidates WHERE DATE(start_date) <= :today AND DATE(end_date) >= :today");
-    $query = "SELECT users.first_name, users.last_name, candidates.passport, candidates.position, candidates.party FROM users 
+    $query = "SELECT candidates.id, users.first_name, users.last_name, candidates.passport, candidates.position, candidates.party, candidates.disabled FROM users 
     INNER JOIN candidates ON users.id = candidates.user_id
     INNER JOIN elections ON candidates.election_id = elections.election_id
-    WHERE DATE(elections.start_date) <= :today AND DATE(elections.end_date) >= :today;
+    WHERE DATE(elections.start_date) <= :today AND DATE(elections.end_date) >= :today AND candidates.approval = 1;
     SELECT users.id, users.first_name, users.last_name, users.dob, 
     candidates.passport, candidates.credential, candidates.position, candidates.party 
-    FROM users INNER JOIN candidates ON users.id = candidates.user_id     WHERE election_id is NULL;";
-    // SELECT users.first_name, users.last_name, candidates.passport, candidates.position, candidates.party 
-    // FROM users INNER JOIN candidates ON users.id = candidates.user_id 
-    // WHERE DATE(candidates.start_date) <= :today AND DATE(candidates.end_date) >= :today;
-    // SELECT users.first_name, users.last_name, candidates.passport, candidates.position, candidates.party, candidates.credential 
-    // FROM users INNER JOIN candidates ON users.id = candidates.user_id WHERE candidates.approval=0;
-    // SELECT users.first_name, users.last_name, partyLeaders.passport, partyLeaders.party, partyLeaders.credential 
-    // FROM users INNER JOIN partyLeaders ON users.id = partyLeaders.user_id WHERE partyLeaders.approval=0;
+    FROM users INNER JOIN candidates ON users.id = candidates.user_id     WHERE approval = 0;
+    SELECT users.id, users.first_name, users.last_name, partyLeaders.no, partyLeaders.passport, partyLeaders.credential, partyLeaders.party 
+    FROM users INNER JOIN partyLeaders ON users.id = partyLeaders.user_id     WHERE approval = 0;
+    SELECT candidates.id, users.first_name, users.last_name, candidates.passport, candidates.position, candidates.party, candidates.disabled FROM users      
+    INNER JOIN candidates ON users.id = candidates.user_id 
+    WHERE candidates.approval = 1 AND candidates.election_id is NULL;";
     $data = $conn->prepare($query);
   $data->bindParam(':today', $today);
   $data->execute();
+  //result query for active elections
   $result = $data->fetchAll();
-//   var_dump($result);
-//   exit();
-  $data->nextRowset();
+//result query for candidates notifications
+$data->nextRowset();
 $result1 = $data->fetchAll();
-
-$approvalCheck = (count($result1) > 0)?true:false;
-// print_r($result1);
+$candidateCheck = (count($result1) > 0)?true:false;
+//result query for partyLeaders notifications
+$data->nextRowset();
+$result2 = $data->fetchAll();
+$partyLeaderCheck = (count($result2) > 0)?true:false;
+//result query for pending elections
+$data->nextRowset();
+$result3 = $data->fetchAll();
+// print_r($result3);
 // exit();
-// $data->nextRowset();
-// $result2 = $data->fetchAll();
-
-//   $result = $data->fetch(PDO::FETCH_ASSOC);
-//   var_dump($result2);
-//   exit();
 }catch(PDOException $e)
 {
 echo "Error: " . $e->getMessage();
@@ -73,8 +72,11 @@ $conn = null;
     <script type="text/javascript" src="./resources/jquery-ui-1.12.1/jquery-ui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./resources/bootstrap-4.1.0-dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="./resources/bootstrap-4.1.0-dist/js/bootstrap.bundle.js"></script>
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Galada|Wendy+One" rel="stylesheet">
 </head>
 <body>
+    
     <!--navbar-->
     <nav class="navbar border-bottom">
         <div class="container-fluid">
@@ -84,7 +86,7 @@ $conn = null;
             <ul class="nav navbar-nav navbar-nav right">
                 <li class="col-right">
                 <button class="btn btn-info btn-sm" id="notificationbtn" data-toggle="modal" data-target="#exampleModalLong">
-                <img class="notification" src="./img/background/notification.png" /><span id="notifications"><?php echo count($result1); ?></span>
+                <img class="notification" src="./img/background/notification.png" /><span id="notifications"><?php echo count($result1) + count($result2); ?></span>
 </button>
                     <a href="./login.php" class="btn btn-info btn-sm"> Log Out</a>
                 </li>
@@ -111,7 +113,6 @@ $conn = null;
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -151,7 +152,7 @@ $conn = null;
 
     <!--Welcome-Admin-->
         <div class"col-lg-12" id="admin">
-            <h3 class="display-4 text-primary text-xs-center p-b-1 m-b-1 h1 m-5">ADMIN</h3>
+            <h3 class="display-4 text-primary text-xs-center p-b-1 m-b-1 h1 m-5" style="font-family: 'Wendy One', sans-serif;">ADMIN</h3>
         </div>
     <!--Welcome-Admin/-->
         
@@ -163,20 +164,25 @@ $conn = null;
             
             <div class="center inline-flex">
                 <!--Election Fetch Starts-->
-                <legend class="text-uppercase" style="color: ##187492 !important;">Active Elections</legend>
+                <legend class="text-uppercase header">Active Elections</legend>
             <?php
             
-            function display($position){
-                global $result;
+            function display($position, $active){
+                global $result, $result3;
+                $resultQ = ($active == 1)?$result:$result3;
+                
                 $index = 0;
             echo '<div class="group1 center mb-2">';
-            foreach($result as $output){
+            foreach($resultQ as $output){
                 if($output["position"] == $position){
                     echo ($index == 0)?'<legend class="text-uppercase admin-legend">'.$position.'</legend>':"";
 
-                    echo '<div class="data-fixed-size-lead inline-block  p-1 col-lg-1 col-0">'.$output["party"].'
+                    echo '<div class="data-fixed-size-lead inline-block  p-1 col-lg-1 col-0"';
+                    echo ($output["disabled"] == 1)?' style="background-color: #d40e0e14;"':'';
+                    echo '>'.$output["party"].'
                     <ul class="list-group">
-                        <li class="list-group-item justify-content-center align-items-center">
+                        <li class="list-group-item justify-content-center align-items-center" style="position: relative;">
+                        
                             <img src="'.$output["passport"].'" class="admin-avatar" alt="avatar">
                         </li>
                         <li class="list-group-item justify-content-center align-items-center">'.$output["first_name"].' '.$output["last_name"].'
@@ -184,32 +190,96 @@ $conn = null;
                         </li>
                         <li class="list-group-item justify-content-center align-items-center">
                             <!-- <button class="btn custom-radio"></button> -->
-                            <div class="btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-primary">
-                                    <input type="radio" name="first5" id="option1" autocomplete="off" checked> Delete
+
+                            <div class="btn-group-toggle">
+                                <label class="btn btn-primary" data-toggle="modal" data-target="#Delete_'.$output["id"].'">
+                                    <input type="radio" name="first5" value="Delete" class="delete" autocomplete="off" checked> Delete
                                 </label>
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="first5" id="option1" autocomplete="off" checked> Disable
-                                </label>
+                                <label class="btn btn-secondary" data-toggle="modal" ';
+                                echo ($output["disabled"] == 1)?'style="background-color: #8a0c23;" data-target="#Enable_':'data-target="#Disable_';
+                                echo $output["id"].'">
+                                    <input type="radio" name="first5" value="Disable" class="disable" autocomplete="off">';
+                                    echo ($output["disabled"] == 1)?' Enable':' Disable';
+                                    echo '</label>
                             </div>
                         </li>
                     </ul>
                 </div>';
+                $disabledCheck = ($output["disabled"] == 1)?'Enable':'Disable';
+                modal($output["id"], $output["first_name"], $output["last_name"], $position, "Delete");
+                modal($output["id"], $output["first_name"], $output["last_name"], $position, $disabledCheck);
                     
                 $index = 1;    
             }
             }
         }
-            //Elections by category
-            display("Presidential");
-            display("Governorship");
-            display("Senatorial");
-            display("Chairmanship");
+
+        function modal($id, $first, $last, $position, $action){
+            echo '<!-- Button trigger modal -->
+        
+            <!-- Modal -->
+            <div class="modal fade" id="'.$action.'_'.$id.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                '.$action.' '.$first.' '.$last;
+                echo ($action == "Enable")?' in ':' from ';
+                echo $position.' election?
+                <br><small><b>Note:</b> No changes after confirmation!</small>
+            </div>
+            <div class="modal-footer mx-auto">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form method="post" action="">
+                <input type="text" value="'.$action.'_'.$id.'" name="deleteDisable" style="display: none;" />
+                <input type="submit" value="Submit" name="submitDeleteDisable" class="btn btn-primary" />
+                </form>
+            </div>
+            </div>
+            </div>
+            </div>';
+        }
+        //Elections by category
+        if(count($result) < 1){
+            echo '<p>No results</p>';
+        }else{
+            display("Presidential", 1);
+            display("Governorship", 1);
+            display("Senatorial", 1);
+            display("Chairmanship", 1);
             echo '</div>';
+        }
             ?>
             </div>
         </div>
-    <!--ELection-Section/-->
+    <!--Active ELection-Section/-->
+
+    <!--Pending ELection-Section-->   
+    <div class="container grid">
+            <div class="center inline-flex">
+                <!--Election Fetch Starts-->
+            <legend class="text-uppercase header">Pending Elections</legend>
+
+            <?php
+            //Elections by category
+            if(count($result3) < 1){
+                echo '<p>No results</p>';
+            }else{
+            display("Presidential", 0);
+            display("Governorship", 0);
+            display("Senatorial", 0);
+            display("Chairmanship", 0);
+            echo '</div>';
+        }
+            ?>
+            </div>
+        </div>
+    <!--Pending ELection-Section/-->
 
     <!-- Footer -->
         <div class="footer row p-2 mt-3 rounded-0">
@@ -220,6 +290,6 @@ $conn = null;
         </div>
     <!-- Footer -->
    
-    <script src="js/admin.js"></script>
+    <script src="js/admin.js"></script> 
 </body>
 </html>

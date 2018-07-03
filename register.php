@@ -1,12 +1,17 @@
 
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if(isset($_GET["user"]) && $_GET["user"] == 0){
     echo "<script>alert('No User found!');</script>"; 
 }
 if(isset($_GET["Ind"]) && $_GET["Ind"] == 1){
     echo "<script>alert('Invalid data!');</script>"; 
 }
+
 include 'formhandle.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +73,7 @@ include 'formhandle.php';
                             </a>
                         </small>
                         <p class="error"><?php echo $userExists; ?></p>
+                        <p class="error"><?php echo $noNetwork; ?></p>
                     </div>
                 </hgroup>
                 <form method="post">
@@ -173,7 +179,7 @@ include 'formhandle.php';
                     <h3 class="heading">Register</h3>
                     <div>
                         <small>Don't have an Account?
-                            <a href="register.html">
+                            <a href="register.php">
                                 <span>Register</span>
                             </a>
                         </small>

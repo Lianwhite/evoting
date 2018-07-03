@@ -25,7 +25,7 @@ try {
     $query = "SELECT users.id, users.first_name, users.last_name, candidates.passport, candidates.position, candidates.party, candidates.election_id, candidates.no_votes FROM users 
     INNER JOIN candidates ON users.id = candidates.user_id
     INNER JOIN elections ON candidates.election_id = elections.election_id
-    WHERE DATE(elections.start_date) <= :today AND DATE(elections.end_date) >= :today";
+    WHERE DATE(elections.start_date) <= :today AND DATE(elections.end_date) >= :today AND candidates.disabled = 0";
     $data = $conn->prepare($query);
   $data->bindParam(':today', $today);
   $data->execute();
