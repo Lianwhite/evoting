@@ -1,0 +1,171 @@
+body {
+    /* font-family: 'Roboto', sans-serif !important; */
+    /* font-family: 'Montserrat', sans-serif; */
+}
+
+/* .colored {
+    border-bottom-color: 
+} */
+
+/* s1 */
+
+@media screen and (max-width:425px) {
+    .section-s1 {
+        max-width: 100% !important;
+        min-height: 25vh !important;
+        object-fit: contain !important;
+    }
+}
+
+.section-s1 {
+    background: rgba(0, 0, 0, .3) url(../img/background/ngnparty.jpg) no-repeat 0 0 / contain;
+    padding: 10px;
+    background-blend-mode: multiply;
+    max-width: 100%;
+    min-height: 100vh;
+    opacity: 0.5;
+    object-fit: contain;
+}
+
+/* end s1 */
+
+/* s2 */
+
+.candidate-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: solid 2px darkgreen;
+    border-radius: 16px;
+}
+
+.admin-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: solid 2px lightgray;
+    border-radius: 16px;
+}
+
+.data-fixed-size-lead .badge {
+    background: gray;
+    letter-spacing: 3px;
+}
+
+.data-fixed-size-lead li {
+    border: none;
+    padding: 15px;
+}
+
+legend {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 10px;
+    color: darkgreen;
+    border-top: none;
+    border-bottom: solid 2px darkgreen;
+}
+
+.admin-legend {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 10px;
+    color: lightblue;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.data-fixed-size-lead {
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 16px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(-45deg, darkgreen, limegreen);
+    background: transparent;
+}
+
+.vote-btn {
+    background: linear-gradient(90deg, darkgreen, limegreen);
+    /* border: none; */
+    /* border-radius: 12px; */
+    /* display: block; */
+    /* font-size: .9em; */
+    /* font-weight: lighter; */
+    /* height: 35px; */
+    color: white;
+    /* padding: 5px 15px; */
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all .3s ease-out;
+}
+.voted-btn {
+    pointer-events: none;
+    background: linear-gradient(90deg, #ce9fda, limegreen);
+    /* border: none; */
+    /* border-radius: 12px; */
+    /* display: block; */
+    /* font-size: .9em; */
+    /* font-weight: lighter; */
+    /* height: 35px; */
+    color: white;
+    /* padding: 5px 15px; */
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all .3s ease-out;
+}
+
+[class*=btn].expand {
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+    .data-fixed-size-lead {
+        max-width: 18% !important;
+    }
+}
+
+/* end s2 */
+
+/* footer */
+
+.footer {
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 50px;
+}
+
+/* end footer */
+.col-right img{
+    width: 30px;
+    height: 30px;
+}
+#notifications{
+    display: inline-block;
+    background-color: brown;
+    padding: 1px 4px;
+    border-radius: 10px;
+}
+.navbar-nav li a:nth-child(2){
+    padding: 10px;
+}
+.modalTitle{
+    background-color: #055277;
+    color: #d1e4ec;
+}
+.inline-flex legend.header{
+    color: #d5d7d8 !important; 
+    background-color: #055277 !important;
+    font-family: 'Wendy One', sans-serif;
+}
+.inline-flex legend.indexheader{
+    color: #d5d7d8 !important; 
+    background-color: #062d03 !important;
+    font-family: 'Wendy One', sans-serif;
+}
+/* .carousels{
+    height: 70vh !important;
+
+} */
