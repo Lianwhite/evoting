@@ -1,4 +1,4 @@
-This system was designed by Olotu Square DevSq Fellows 2018. Supervised by Instructors Mr Melas and Mr Sazzeb.
+This system was designed by Olotu Square DevSq Fellows 2018. Supervised by Instructors Mr Melas, Mr Sazzeb and Mr Mike.
 Fellows involved in this project are:
 
 Front-End developers
