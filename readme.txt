@@ -12,7 +12,9 @@ Back-End developers
 Marshall
 Chidi
 
-This system is open for contributions from the public. If you feel any part of this project should be modified or new features added,initiate a pull request and we will take it from there. Due credit will be given to you.
+This system is open for contributions from the public. 
+If you feel any part of this project should be modified or new features added,initiate a pull request and we will take it from there. 
+Due credit will be given to you.
 
 TECHNOLOGIES USED FOR THIS PROJECT
 
